@@ -13,16 +13,16 @@ class MoviesController < ApplicationController
   def index
     @all_ratings = Movie.all_ratings
     
-    if params[:ratings] == nil 
-      ratings = session[:ratings]
-    else
+    if params[:ratings] != nil 
       ratings = params[:ratings]
+    else
+      ratings = session[:ratings]
     end
   
-    if params[:sort_by] == nil
-      sort_by = session[:sort_by]
+    if params[:sort_by] != nil
+      sort_by = params[:sort_by]
     else
-       sort_by = params[:sort_by]
+       sort_by = session[:sort_by]
      end
     
     if ratings
@@ -32,7 +32,7 @@ class MoviesController < ApplicationController
     end 
     
     session[:ratings] = @ratings
-    session[:sort_by] = @sort_by
+    session[:sort_by] = @sort_with
   end
 
   def new
@@ -64,4 +64,5 @@ class MoviesController < ApplicationController
   end
 
 end
+
 
